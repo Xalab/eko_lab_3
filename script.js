@@ -106,10 +106,10 @@ let ClasyfycatsiyaRivnyvRyzyku = {
         "Мінімальний"
     ],
     ryzykProtyagomZhyttya: {
-        first: pow(10, -3),
-        second: [pow(10, -3), pow(10, -4)],
-        third: [pow(10, -4), pow(10, -6)],
-        fourth: pow(10, -6)
+        first: Math.pow(10, -3),
+        second: [Math.pow(10, -3), Math.pow(10, -4)],
+        third: [Math.pow(10, -4), Math.pow(10, -6)],
+        fourth: Math.pow(10, -6)
     }
 }
 
@@ -324,3 +324,56 @@ let factoryKancerPotential = {
         65
     ]
 }
+
+document.getElementById('out').checked = true;
+document.getElementById("chastota").value = "365";
+document.getElementById("trivalist").value = "30";
+document.getElementById("vaga").value = "70";
+
+document.getElementById("form").addEventListener('submit', evt => {
+    evt.preventDefault();  
+});
+
+function isInOrOut() {
+    let inside = document.getElementById("in").checked;
+    let out = document.getElementById("out").checked;
+    if (inside) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+document.getElementById("rozrah").addEventListener('click', () => {
+    let e = document.getElementById("selectRech");
+    let rechovyna = e.options[e.selectedIndex].text;
+    let inOrOut = isInOrOut();
+    let chastota = document.getElementById("chastota").value;
+    let tryvalist = document.getElementById("trivalist").value;
+    let vaga = document.getElementById("vaga").value;
+
+    let Ca = refConcentZaHronIngVpliv.RfC[refConcentZaHronIngVpliv.rechovyna.findIndex((elem) => {return elem == rechovyna})];
+    console.log("Ca = " + Ca);
+
+    let Ch = 1 * Ca;
+    console.log("Ch = " + Ch);
+
+    let Tin = faktorEkspozytsyy.chasUPrimishchenny.velychyna.budny[0];
+    console.log("Tin = " + Tin);
+
+    let Tout = faktorEkspozytsyy.ChasPozaPrimishchennyam.velychyna.budny[0];
+    console.log("Tout = " + Tout);
+
+    let Vin = 0.63;
+    let Vout = 1.4;
+
+    EF = chastota;
+    ED = tryvalist;
+    BW = vaga;
+    AT = 70;
+
+    let LADD = serednyaDobovaDoza(Ca, Ch, Tout, Tin, Vout, Vin, EF, ED, BW, AT);
+
+
+});

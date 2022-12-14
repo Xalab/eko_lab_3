@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Лабораторна робота №3</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Екологічний моніторінг</h1>
+        <h2>Над лабораторною роботою працювали: Маркарян А.А., Шмойлов С.Р., Денис К.А.</h2>
+        <h2>Лабораторна робота №3</h2> 
+    </div>
+    <div class="container">
+        <h3>Розрахунок канцероггенного ризику, пов'язаного із забрудненням атмосферного повітря</h3>
+        <div class="air-poll" id="air-poll">
+            <form class="form" id="form">
+                <p>Вкажіть речовину</p>
+                <select name="selectRech" id="selectRech" class="marbot">
+                    <option value="azot">Азотна кислота</option>
+                    <option value="amiak">Аміак</option>
+                    <option value="benzol">Бензол</option>
+                    <option value="etanol">Етанол</option>
+                    <option value="keros">Керосин</option>
+                    <option value="rtut">Ртуть та сполуки</option>
+                    <option value="sirka">Сірки діоксид</option>
+                    <option value="fosfor">Фосфор</option>
+                    <option value="hlor">Хлор</option>
+                    <option value="hlormet">Хлорметан</option>
+                    <option value="hlorform">Хлороформ</option>
+                    <option value="hloretan">Хлоретан</option>
+                    <option value="cianidy">Ціаніди</option>
+                    <option value="cyklogex">Циклогексан</option>
+                    <option value="cink">Цинк та сполуки</option>
+                </select>
+                <p class="rah">Рахувати у приміщенні?</p>
+                <input type="radio" name="isInOrOut" value="in" id="in"><label for="in">Так</label>
+                <input type="radio" name="isInOrOut" value="out" id="out"><label for="out">Ні</label>
+                <p>Вкажіть частоту впливу у днях за рік</p>
+                <input type="text" id="chastota" class="marbot">
+                <p>Вкажіть тривалість впливу у роках</p>
+                <input type="text" id="trivalist" class="marbot">
+                <p>Вкажіть вашу вагу у кілограмах</p>
+                <input type="text" id="vaga" class="marbot">
+                <br>
+                <button class="btn btn-primary" id="rozrah">Розрахувати</button>
+                <p></p>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

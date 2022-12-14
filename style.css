@@ -1,0 +1,39 @@
+
+h1, h2 {
+    text-align: center;
+}
+
+h1:first-child {
+    margin-top: 50px;
+}
+
+h3 {
+    font-size: 26px;
+}
+
+p {
+    font-size: 20px;
+}
+
+.container:first-child {
+    margin-bottom: 100px;
+}
+
+.form {
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 40px;
+}
+
+.marbot {
+    margin-bottom: 20px;
+}
+
+.rah {
+    width: 500px;
+    margin-right: 0;
+}
+
+.where {
+    display: inline-block;
+}
