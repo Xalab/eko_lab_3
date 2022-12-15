@@ -4,10 +4,9 @@
 // впливу речовини з атмосферного повітря
 function serednyaDobovaDoza(Ca, Ch, Tout, Tin, Vout, Vin, EF, ED, BW, AT) {
     
-    let ADD = ((Ca * Tout * Vout) + (Ch * Tin * Vin)) * EF * ED;
-    let LADD = BW * AT * 365;
-    let result = [ADD, LADD];
-    return result;
+    let LADD = (((Ca * Math.pow(10, -6) * Tout * Vout) + (Ch * Tin * Vin)) * EF * ED) / (BW * AT * 365);
+
+    return LADD;
 }
 
 // порівняння    фактичних   рівнів   експозиції 
@@ -36,18 +35,18 @@ function koeficientNebezpekyRechovyny (C, RfC) {
 }
 
 //  Критерії неканцерогенного ризику 
-function isDangerous(HQ) {
-    if (HQ > 1) {
-        return "Імовірність розвитку шкідливих ефектів зростає пропорційно збільшенню HQ";
+function isDangerous(CR) {
+    if (CR >= 10 && CR < 1000) {
+        return "Низький";
     }
-    else if (HQ < 1) {
-        return "Ризик виникнення шкідливих ефектів розглядають як зневажливо малий";
+    else if (CR < 10) {
+        return "Мінімальний";
     }
-    else if (HQ == 1) {
-        return "Гранична величина, що не потребує термінових заходів, однак не може розглядатися як досить прийнятна";
+    else if (CR >= 1000 && CR < 10000) {
+        return "Середній";
     }
-    else {
-        return "Щось пійшло не так";
+    else if (CR > 10000){
+        return "Високий";
     }
 }
 
@@ -352,8 +351,10 @@ document.getElementById("rozrah").addEventListener('click', () => {
     let chastota = document.getElementById("chastota").value;
     let tryvalist = document.getElementById("trivalist").value;
     let vaga = document.getElementById("vaga").value;
+    let kilkist = document.getElementById("kilkist").value;
 
-    let Ca = refConcentZaHronIngVpliv.RfC[refConcentZaHronIngVpliv.rechovyna.findIndex((elem) => {return elem == rechovyna})];
+    // let Ca = refConcentZaHronIngVpliv.RfC[refConcentZaHronIngVpliv.rechovyna.findIndex((elem) => {return elem == rechovyna})];
+    Ca = kilkist;
     console.log("Ca = " + Ca);
 
     let Ch = 1 * Ca;
@@ -374,6 +375,24 @@ document.getElementById("rozrah").addEventListener('click', () => {
     AT = 70;
 
     let LADD = serednyaDobovaDoza(Ca, Ch, Tout, Tin, Vout, Vin, EF, ED, BW, AT);
+    
+    console.log("LADD = " + LADD + " помножена на 10 у -6 степені мг/кг-доба");
+
+    let SF = Ca * Math.random(1) * 3;
+
+
+    console.log(Math.random(1) * 3);
+    // Величина індивідуального канцерогенного ризику
+    let CR = individualKancerogenRyzyk(LADD, SF);
+
+    console.log("CR = " + CR + " помножена на 10 у -6 степені");
+    
+    console.log(isDangerous(CR))
+    
+
+    let ladd = document.getElementById("LADD").innerText = "LADD = " + LADD + " помножена на 10 у -6 степені мг/кг-доба";
+    let cr = document.getElementById("CR").innerText = "CR = " + CR + " помножена на 10 у -6 степені"
+    let rivenRyz = document.getElementById("rivenRyz").innerHTML = "Рівень небезпеки: " + isDangerous(CR);
 
 
 });
